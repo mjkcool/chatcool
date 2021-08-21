@@ -5,27 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/semantic.css">
     <script
         src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
-        <script src="semantic/dist/semantic.min.js"></script>
+    <script src="./semantic/semantic.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="./index.css">
 </head>
 <body>
-    <div class="ui inverted segment">
-        <div class="ui inverted secondary menu">
-            <a class="item">
-                Home
-            </a>
-            <a class="item active">
-                Messages
-            </a>
-            <a class="item">
-                Friends
-            </a>
-        </div>
+  <div class="ui fixed inverted menu">
+    <div class="ui container">
+      <a id="ToHomeBtn" class="header item">
+        <i class="teal big comments icon"></i>
+        CHATCOOL
+      </a>
+      <a id="ToJoinBtn" class="item">Join in as a Client</a>
+      <a id="ToCreateBtn" class="item">Create Server</a>
     </div>
+  </div>
+  
+  <div id="tab1" class="ui main text container">
+    <h1 class="ui header">tab1</h1>
+    <p>This is a basic fixed menu template using fixed size containers.</p>
+  </div>
+  <div id="tab2" class="ui main text container hide">
+    <h1 class="ui header">tab2</h1>
+    <p>This is a basic fixed menu template using fixed size containers.</p>
+  </div>
+  <div id="tab3" class="ui main text container hide">
+    <h1 class="ui header">tab3</h1>
+    <p>This is a basic fixed menu template using fixed size containers.</p>
+  </div>
+
+
+  <div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+      <div class="ui stackable inverted divided grid">
+        2021. chatcool💙 <a class="item" href="#">Github</a>
+      </div>
+    </div>
+  </div>
 </body>
+<script src="main.js"></script>
 </html>
