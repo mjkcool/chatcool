@@ -27,3 +27,29 @@ function openCreateContent(){ //tab3
     if(!tab2.classList.contains("hide")) tab2.classList.add("hide");
     if(!tab1.classList.contains("hide")) tab1.classList.add("hide");
 }
+
+$("#createform").form({
+    fields: {
+        port: ['empty', 'exactLength[4]', 'integer']
+    }
+});
+
+function enterRoom(){
+    if( $("#createform").form('is valid')) {
+        let $port = $("#createroomport").val();
+        console.log($port);
+        $.ajax({
+            url: '/chat',
+            type: 'POST',
+            data: {port: $port},
+            dataType: 'json',
+            error: function(request,status,error){
+                alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+            }
+        });
+        //location.href = `http://localhost:${$port}/`;
+    }
+}
+
+
+
