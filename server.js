@@ -23,10 +23,11 @@ const httpServer = http.createServer(app).listen(PORT, () => {
     console.log(`server is running at ${PORT}`);
 });
 
-const socketIoServer = socketIO(httpServer);
-socketIoServer.on("connection", socket => {
-    console.log("socket io connected");
+const io = socketIO(httpServer);
+io.on("connection", socket => {
+    console.log("[client] 접속");
     socket.on("main", (data) => {
         console.log(data);
+        socket.emit("main", "[server]"+" 잘왔어요")
     });
 });
