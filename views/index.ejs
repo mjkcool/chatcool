@@ -31,12 +31,25 @@
     <p>This is a basic fixed menu template using fixed size containers.</p>
   </div>
   <div id="tab2" class="ui main text container hide">
-    <h1 class="ui header">tab2</h1>
+    <h1 class="ui header">채팅에 참여하세요</h1>
     <p>This is a basic fixed menu template using fixed size containers.</p>
+    <div class="ui form">
+      <div class="fields">
+        <div class="field">
+          <input type="text" placeholder="IP주소">
+        </div>
+        <div class="field">
+          <input type="text" placeholder="포트번호">
+        </div>
+        <button class="ui teal button">
+          접속
+        </button>
+      </div>
+    </div>
   </div>
   <div id="tab3" class="ui main text container hide">
     <h1 class="ui header">채팅 서버를 생성하세요</h1>
-    <p>클라이언트들이 고유의 포트번호를 통해 당신의 방에 접속할 수 있습니다</p>
+    <p><%= host%> 클라이언트들이 고유의 포트번호를 통해 당신의 방에 접속할 수 있습니다</p>
     <div id="createform" class="ui form">
       <div class="fields">
         <div class="required field">
@@ -44,7 +57,7 @@
           <input id="createroomport" name="port" placeholder="9999">
         </div>
       </div>
-      <button class="ui submit button" onclick="enterRoom()">Create room</button>
+      <button class="ui button" onclick="enterRoom()">생성</button>
     </div>
   </div>
 
@@ -56,5 +69,5 @@
     </div>
   </div>
 </body>
-<script src="main.js"></script>
+<script src="index.js"></script>
 </html>

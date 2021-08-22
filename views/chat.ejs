@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./semantic/semantic.css">
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+    <script src="./semantic/semantic.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="./chat.css">
+</head>
+<body>
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+          <a id="ToHomeBtn" class="header item">
+            <i class="teal big comments icon"></i>
+            CHATCOOL
+          </a>
+          <a id="disconnectBtn" class="item">Close your chat</a>
+        </div>
+      </div>
+      <div id="tab1" class="ui main text container">
+        <div id="messages">
+          <div class="inline field">
+            너구리
+            <div class="ui left pointing large label">
+              [테스트]반갑습니다!
+            </div>
+          </div>
+        </div>
+
+        <div class="ui fluid action input">
+          <input type="text" placeholder="대화를 입력하세요">
+          <button class="ui icon button">
+              <i class="paper plane icon"></i>&nbsp;&nbsp;전송&nbsp;
+            </button>
+        </div>
+      </div>
+</body>
+<script src="chat.js"></script>
+</html>

@@ -38,15 +38,22 @@ function enterRoom(){
     if( $("#createform").form('is valid')) {
         let $port = $("#createroomport").val();
         console.log($port);
-        $.ajax({
-            url: '/chat',
-            type: 'POST',
-            data: {port: $port},
-            dataType: 'json',
-            error: function(request,status,error){
-                alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-            }
-        });
+        // $.ajax({
+        //     url: '/chat',
+        //     type: 'POST',
+        //     data: {port: $port},
+        //     dataType: 'json',
+        //     success: function(data) { 
+        //         location.href = `/${data.url}`;
+        //     },
+        //     error: function(request,status,error){
+        //         alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+        //     }
+        // });
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "/createchat", true);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.send(JSON.stringify({port: $port}));
         //location.href = `http://localhost:${$port}/`;
     }
 }
