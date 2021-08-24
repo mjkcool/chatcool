@@ -21,13 +21,13 @@
             <i class="teal big comments icon"></i>
             CHATCOOL
           </a>
-          <a id="disconnectBtn" class="item">Close your chat</a>
+          <a id="disconnectBtn" class="item">Quit</a>
       
         </div>
       </div>
       <div class="ui main text container">
         <div id="message-container">
-          <div class="field message others">
+          <!--<div class="field message others">
             너구리
             <div class="ui left pointing large label">
               [테스트]반갑습니다!
@@ -40,15 +40,14 @@
             </div>
             민정
           </div>
+        </div>-->
 
-        </div>
-
-        <div id="input-container" class="ui fluid action input">
-          <input type="text" placeholder="대화를 입력하세요">
-          <button class="ui icon button">
-              <i class="paper plane icon"></i>&nbsp;&nbsp;전송&nbsp;
-            </button>
-        </div>
+      </div>
+      <div id="input-container" class="ui fluid action input">
+        <input id="message-input" type="text" placeholder="대화를 입력하세요">
+        <button id="send-message" class="ui icon button">
+            <i class="paper plane icon"></i>&nbsp;&nbsp;전송&nbsp;
+        </button>
       </div>
 </body>
 <script src="chat.js"></script>

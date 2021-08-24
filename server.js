@@ -24,10 +24,19 @@ const httpServer = http.createServer(app).listen(PORT, () => {
 });
 
 const io = socketIO(httpServer);
-io.on("connection", socket => {
-    console.log("[client] 접속");
-    socket.on("main", (data) => {
+let roomName;
+io.on("connection", client => {
+    let clientId = client.id;
+    client.on("joinRoom", data => {
         console.log(data);
-        socket.emit("main", "[server]"+" 잘왔어요")
+        client.join(data.roomName); // 특정 룸에 입장
+        roomName = data.roomName;
+        io.sockets.in(roomName).emit("joinClientNotice", `[server] ${clientId} 님이 접속했습니다`);
+    });
+
+    client.on('reqMsg', data => {
+        console.log(data);
+        //특정 룸으로 데이터 전송
+        io.sockets.in(roomName).emit('recMsg', {name: clientId, comment: data.comment});
     });
 });
