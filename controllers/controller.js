@@ -9,7 +9,8 @@ const createChat = (req, res) => {
         success: true, 
         port: req.body.port, 
         url: "create_server"});*/
-    res.render('chat');
+    res.cookie('nickname', req.body.nickname);
+    res.send({success: true});
 }
 
 const chat = (req, res) => {

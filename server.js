@@ -3,6 +3,7 @@ const http = require("http");
 const path = require("path");
 const socketIO = require("socket.io");
 const Router = require("./routes/route");
+const cookieParser = require('cookie-parser');
 const app = express();
 
 let SERVER_LIST = [];
@@ -14,17 +15,20 @@ app.engine('html', require('ejs').renderFile);
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded({extended:false})); //Parse URL-encoded bodies
 app.use(express.static(path.join(__dirname, 'static')));
+app.use(cookieParser());
 
 app.use('/', Router);
 
 const PORT = process.env.PORT || 5001;
 
 const httpServer = http.createServer(app).listen(PORT, () => {
-    console.log(`server is running at ${PORT}`);
+    console.log(`server is running at ${PORT}`)
+    
 });
 
 const io = socketIO(httpServer);
 let roomName;
+let nicknames = [];
 io.on("connection", client => {
     let clientId = client.id;
     client.on("joinRoom", data => {
@@ -35,8 +39,15 @@ io.on("connection", client => {
     });
 
     client.on('reqMsg', data => {
-        console.log(data);
+        let nickname = data.name;
+        console.log(data.name)
+        nicknames.push({clientId: nickname});
         //특정 룸으로 데이터 전송
-        io.sockets.in(roomName).emit('recMsg', {name: clientId, comment: data.comment});
+        io.sockets.in(roomName).emit('recMsg', {name: nickname, comment: data.comment});
     });
+
+    client.on("disconnect", () => {
+        io.sockets.in(roomName).emit("joinClientNotice", `[server] ${clientId} 님이 나갔습니다`);
+    });
+
 });

@@ -36,15 +36,17 @@
     <div class="ui form">
       <div class="fields">
         <div class="field">
-          <input type="text" placeholder="IP주소">
+          <label>포트 번호</label>
+          <input type="text" placeholder="">
         </div>
         <div class="field">
-          <input type="text" placeholder="포트번호">
+          <label>사용할 닉네임</label>
+          <input type="text" placeholder="">
         </div>
-        <button class="ui teal button">
-          접속
-        </button>
       </div>
+      <button class="ui teal button">
+        접속
+      </button>
     </div>
   </div>
   <div id="tab3" class="ui main text container hide">
@@ -55,6 +57,10 @@
         <div class="required field">
           <label>생성할 방의 포트번호(4자리)</label>
           <input id="createroomport" name="port" placeholder="9999">
+        </div>
+        <div class="field">
+          <label>사용할 닉네임</label>
+          <input id="host-nickname" type="text" placeholder="">
         </div>
       </div>
       <button class="ui button" onclick="enterRoom()">생성</button>
