@@ -3,13 +3,17 @@ const index = (req, res) => {
     res.render('index', {host: ""});
 }
 
+const encodeCookieValue = (val) => {
+    return val;
+}
+
 const createChat = (req, res) => {
     console.log(req.body);
     /*res.send({
         success: true, 
         port: req.body.port, 
         url: "create_server"});*/
-    res.cookie('nickname', req.body.nickname);
+    res.cookie('nickname', req.body, {encode: encodeCookieValue});
     res.send({success: true});
 }
 

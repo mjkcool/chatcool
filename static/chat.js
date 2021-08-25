@@ -26,6 +26,6 @@ const sendBtn = document.querySelector("#send-message");
 sendBtn.addEventListener("click", sendMessageToServer)
 
 function sendMessageToServer(){
-  socket.emit("reqMsg", {comment: $('#message-input').val()});
+  socket.emit("reqMsg", {name: document.cookie, comment: $('#message-input').val()});
   $('#message-input').val('');
 }
