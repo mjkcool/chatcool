@@ -20,12 +20,12 @@ socket.on("recMsg", data => {
         </div>
     </div>
     `);
-})
+});
 
 const sendBtn = document.querySelector("#send-message");
 sendBtn.addEventListener("click", sendMessageToServer)
 
 function sendMessageToServer(){
-  socket.emit("reqMsg", {comment: $('#message-input').val()})
+  socket.emit("reqMsg", {comment: $('#message-input').val()});
   $('#message-input').val('');
 }

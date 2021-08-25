@@ -5,11 +5,8 @@ const index = (req, res) => {
 
 const createChat = (req, res) => {
     console.log(req.body);
-    /*res.send({
-        success: true, 
-        port: req.body.port, 
-        url: "create_server"});*/
-    res.render('chat');
+
+    //res.json({url: 'chat'});
 }
 
 const chat = (req, res) => {
