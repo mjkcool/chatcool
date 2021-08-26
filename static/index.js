@@ -43,19 +43,8 @@ function enterRoom(){
         let $port = $("#createroomport").val();
         let $name = $("#host-nickname").val();
         console.log($port);
-        $.ajax({
-            url: '/createchat',
-            type: 'POST',
-            data: {port: $port, nickname: $name},
-            dataType: 'json',
-            success: function(data) { 
-                location.href = `${data.protocol}://${data.ip}:${data.port}/chat`;
-                // location.href = '/chat';
-            },
-            error: function(request,status,error){
-                alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-            }
-        });
+        location.href = `createchat?port=${$port}&nickname=${$name}`;
+        
     }
 }
 

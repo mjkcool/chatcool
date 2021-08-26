@@ -12,7 +12,7 @@ function goHome(){
 }
 
 
-const socket = io.connect('http://localhost:5001/', { transports: ['websocket'] });
+const socket = io.connect('http://localhost:5002/', { transports: ['websocket'] });
 
 socket.emit("joinRoom", {roomName: 'mainroom'});
 
@@ -20,7 +20,7 @@ socket.emit("joinRoom", {roomName: 'mainroom'});
 socket.on("joinClientNotice", data => {
     $('#message-container').append(`<h5 class="ui header" style='text-align: center; padding: 0; margin-bottom: 1em;'>[server] ${data} 님이 입장했습니다</div>`);
     // myNameView.innerHTML = `(You)${data}`
-    
+
 });
 
 socket.on("quitClientNotice", data => {

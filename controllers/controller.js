@@ -1,3 +1,5 @@
+// const ServerController = require('./../server');
+
 const index = (req, res) => {
     //let ip = getIPAddress();
     // res.clearCookie("nickname");
@@ -5,13 +7,9 @@ const index = (req, res) => {
 }
 
 const createChat = (req, res) => {
-    console.log(req.body);
-    /*res.send({
-        success: true, 
-        port: req.body.port, 
-        url: "create_server"});*/
-    res.cookie('nickname', req.body.nickname);
-    res.send({protocol: process.env.protocol, ip: process.env.HOST, port: req.body.port, isHost: true});
+    res.cookie('nickname', req.query.nickname);
+    // ServerController.createChatServerInstance(Number(req.body.port));
+    res.redirect(`${process.env.protocol}://${process.env.HOST}:${req.query.port}/chat`);
 }
 
 const chat = (req, res) => {
