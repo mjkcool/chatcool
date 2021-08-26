@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const express = require("express");
 const http = require("http");
 const path = require("path");
@@ -25,6 +26,9 @@ const PORT = process.env.PORT;
 const protocol = process.env.protocol;
 const HOST = process.env.HOST;
 
+let httpServerList = {}; //key: port, value: server object
+let socketServerList = {};
+
 const httpServer = http.createServer(app).listen(PORT, HOST, () => {
     console.log(`server is running at ${protocol}://${HOST}:${PORT}`)
     
@@ -37,6 +41,7 @@ let roomName;
 let Names = {};
 io.on("connection", client => {
     let clientId = client.id;
+    console.log(client.handshake.headers, clientId);
     let cookies = cookie.parse(client.handshake.headers.cookie);
     let clientName = cookies.nickname;
     Names[clientId] = clientName;
@@ -54,7 +59,9 @@ io.on("connection", client => {
     });
 
     client.on("disconnect", () => {
-        io.sockets.in(roomName).emit("joinClientNotice", `[server] ${Names[clientId]} 님이 나갔습니다`);
+        io.sockets.in(roomName).emit("quitClientNotice", Names[clientId]);
         delete Names.clientId;
     });
 });
+
+module.exports = {}

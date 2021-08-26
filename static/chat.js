@@ -19,7 +19,12 @@ socket.emit("joinRoom", {roomName: 'mainroom'});
 
 socket.on("joinClientNotice", data => {
     $('#message-container').append(`<h5 class="ui header" style='text-align: center; padding: 0; margin-bottom: 1em;'>[server] ${data} 님이 입장했습니다</div>`);
-    myNameView.innerHTML = `(You)${data}`
+    // myNameView.innerHTML = `(You)${data}`
+    
+});
+
+socket.on("quitClientNotice", data => {
+  $('#message-container').append(`<h5 class="ui header" style='text-align: center; padding: 0; margin-bottom: 1em;'>[server] ${data} 님이 나갔습니다</div>`);
 });
 
 socket.on("recMsg", data => {
