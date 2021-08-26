@@ -6,7 +6,7 @@ body {
   margin-right: 0.5em;
 }
 .main.container {
-  margin-top: 7em;
+  margin-top: 13vh;
 }
 .ui.footer.segment {
   margin: 5em 0em 0em;
@@ -18,9 +18,8 @@ body {
 
 #message-container{
   margin-bottom: 2em;
-  height: 30em;
-  /* background-color: antiquewhite; */
-  overflow-y: visible;
+  height: 60vh;
+  overflow-y: auto;
 }
 
 .message{
@@ -34,6 +33,11 @@ body {
 .message.mine{
   display: block;
   float: right;
+}
+
+
+.namelabel{
+  font-size: 11pt;
 }
 
 #input-container{

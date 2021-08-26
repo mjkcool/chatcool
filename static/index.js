@@ -28,12 +28,16 @@ function openCreateContent(){ //tab3
     if(!tab1.classList.contains("hide")) tab1.classList.add("hide");
 }
 
+
+
 $("#createform").form({
     fields: {
         port: ['empty', 'exactLength[4]', 'integer'],
         nickname: 'empty'
     }
 });
+
+
 
 function enterRoom(){
     if( $("#createform").form('is valid')) {
@@ -46,7 +50,7 @@ function enterRoom(){
             data: {port: $port, nickname: $name},
             dataType: 'json',
             success: function(data) { 
-                location.href = `/chat`;
+                location.href = `:${$port}/chat`;
             },
             error: function(request,status,error){
                 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리

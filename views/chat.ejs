@@ -15,40 +15,28 @@
     <link rel="stylesheet" type="text/css" href="./chat.css">
 </head>
 <body>
-    <div class="ui fixed inverted menu">
-        <div class="ui container">
-          <a id="ToHomeBtn" class="header item">
-            <i class="teal big comments icon"></i>
-            CHATCOOL
-          </a>
-          <a id="disconnectBtn" class="item">Quit</a>
-      
-        </div>
-      </div>
-      <div class="ui main text container">
-        <div id="message-container">
-          <!--<div class="field message others">
-            너구리
-            <div class="ui left pointing large label">
-              [테스트]반갑습니다!
-            </div>
-          </div>
-
-          <div class="field message">
-            <div class="ui right pointing large label">
-              Your password must be 6 characters or more
-            </div>
-            민정
-          </div>
-        </div>-->
-
-      </div>
-      <div id="input-container" class="ui fluid action input">
+  <div class="ui fixed inverted menu">
+    <div class="ui container">
+      <a id="ToHomeBtn" class="header item">
+        <i class="teal big comments icon"></i>
+        CHATCOOL
+      </a>
+      <a id="disconnectBtn" class="item">Quit</a>
+    </div>
+  </div>
+  <div class="ui main text container">
+    <div id="message-container">
+    </div>
+    <div class="ui field">
+      <label id="myName" class="namelabel"></label>
+      <div class="ui fluid action input">
         <input id="message-input" type="text" placeholder="대화를 입력하세요">
         <button id="send-message" class="ui icon button">
             <i class="paper plane icon"></i>&nbsp;&nbsp;전송&nbsp;
         </button>
       </div>
+    </div>
+  </div>
 </body>
 <script src="chat.js"></script>
 </html>

@@ -1,21 +1,32 @@
 "use strict"
 
-const socket = io.connect('http://localhost:5001/', { transports: ['websocket'] });
+let mySocketClientId;
 
-console.log(socket);
+const disconnectBtn = document.querySelector("#disconnectBtn");
+if(disconnectBtn) disconnectBtn.addEventListener("click", goHome);
+
+let myNameView = document.querySelector("#myName");
+
+function goHome(){
+  location.href = '/';
+}
+
+
+const socket = io.connect('http://localhost:5001/', { transports: ['websocket'] });
 
 socket.emit("joinRoom", {roomName: 'mainroom'});
 
+
 socket.on("joinClientNotice", data => {
-    //socket.username = "미미";
-    $('#message-container').append(`<h5 class="ui header" style='text-align: center; padding: 0; margin-bottom: 1em;'>${data}</div>`);
+    $('#message-container').append(`<h5 class="ui header" style='text-align: center; padding: 0; margin-bottom: 1em;'>[server] ${data} 님이 입장했습니다</div>`);
+    myNameView.innerHTML = `(You)${data}`
 });
 
 socket.on("recMsg", data => {
   console.log(data.comment);
   $('#message-container').append(`
     <div class="field message others">
-        ${data.name}
+        <span class="ui namelabel">${data.name}</span>
         <div class="ui left pointing large label">
         ${data.comment}
         </div>

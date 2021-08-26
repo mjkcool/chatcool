@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const http = require("http");
 const path = require("path");
@@ -20,12 +21,16 @@ app.use(cookieParser());
 
 app.use('/', Router);
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT;
+const protocol = process.env.protocol;
+const HOST = process.env.HOST;
 
-const httpServer = http.createServer(app).listen(PORT, () => {
-    console.log(`server is running at ${PORT}`)
+const httpServer = http.createServer(app).listen(PORT, HOST, () => {
+    console.log(`server is running at ${protocol}://${HOST}:${PORT}`)
     
 });
+
+
 
 const io = socketIO(httpServer);
 let roomName;
@@ -40,7 +45,7 @@ io.on("connection", client => {
         console.log(data);
         client.join(data.roomName); // 특정 룸에 입장
         roomName = data.roomName;
-        io.sockets.in(roomName).emit("joinClientNotice", `[server] ${Names[clientId]} 님이 접속했습니다`);
+        io.sockets.in(roomName).emit("joinClientNotice", Names[clientId]);
     });
 
     client.on('reqMsg', data => {
@@ -50,6 +55,6 @@ io.on("connection", client => {
 
     client.on("disconnect", () => {
         io.sockets.in(roomName).emit("joinClientNotice", `[server] ${Names[clientId]} 님이 나갔습니다`);
+        delete Names.clientId;
     });
-
 });
