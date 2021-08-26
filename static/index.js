@@ -38,20 +38,25 @@ $("#createform").form({
 function enterRoom(){
     if( $("#createform").form('is valid')) {
         let $port = $("#createroomport").val();
-        let $name = $("#hostname").val();
+        let $name = $("#host-nickname").val();
         console.log($port);
         $.ajax({
-            url: '/chat',
+            url: '/createchat',
             type: 'POST',
-            data: {port: $port, hostname: $name},
+            data: {port: $port, nickname: $name},
             dataType: 'json',
             success: function(data) { 
-                location.href = `/${data.url}`;
+                location.href = `/chat`;
             },
             error: function(request,status,error){
                 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
             }
         });
+        // let xhr = new XMLHttpRequest();
+        // xhr.open("POST", "/createchat", true);
+        // xhr.setequestHeader("Content-type", "application/json");
+        // xhr.send(JSON.stringify({port: $port}));
+        //location.href = R`http://localhost:${$port}/`;
     }
 }
 

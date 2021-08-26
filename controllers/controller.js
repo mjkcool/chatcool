@@ -5,8 +5,12 @@ const index = (req, res) => {
 
 const createChat = (req, res) => {
     console.log(req.body);
-
-    //res.json({url: 'chat'});
+    /*res.send({
+        success: true, 
+        port: req.body.port, 
+        url: "create_server"});*/
+    res.cookie('nickname', req.body.nickname);
+    res.send({success: true});
 }
 
 const chat = (req, res) => {

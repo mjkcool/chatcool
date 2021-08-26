@@ -7,7 +7,8 @@ console.log(socket);
 socket.emit("joinRoom", {roomName: 'mainroom'});
 
 socket.on("joinClientNotice", data => {
-    $('#message-container').append(`<h5 class="ui header" style='text-align: center; padding: 0; margin: 0;'>${data}</div>`);
+    //socket.username = "미미";
+    $('#message-container').append(`<h5 class="ui header" style='text-align: center; padding: 0; margin-bottom: 1em;'>${data}</div>`);
 });
 
 socket.on("recMsg", data => {
