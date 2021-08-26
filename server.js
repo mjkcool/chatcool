@@ -49,7 +49,7 @@ io.on("connection", client => {
     });
 
     client.on("disconnect", () => {
-        io.sockets.in(roomName).emit("joinClientNotice", `[server] ${clientId} 님이 나갔습니다`);
+        io.sockets.in(roomName).emit("joinClientNotice", `[server] ${Names[clientId]} 님이 나갔습니다`);
     });
 
 });
