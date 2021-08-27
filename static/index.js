@@ -10,7 +10,7 @@ let tab1 = document.querySelector("#tab1");
 let tab2 = document.querySelector("#tab2");
 let tab3 = document.querySelector("#tab3");
 
-$(".disableipAddress").attr('value', location.hostname)
+// $(".disableipAddress").attr('value', location.hostname);
 
 function openHomeContent(){ //tab1
     if(tab1.classList.contains("hide")) tab1.classList.remove("hide");

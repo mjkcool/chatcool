@@ -34,7 +34,9 @@ socket.on("joinClientNotice", data => {
       document.querySelector('#disconnectBtn').innerHTML = '채팅 종료';
       // document.querySelector("#menupane").innerHTML += '<div class="item">방장(SERVER)</div>';
     }
+
     $('#message-container').append(`<h5 class="ui header" style='text-align: center; padding: 0; margin-bottom: 1em;'>${message}</h5>`);
+
 });
 
 socket.on("quitClientNotice", data => {
