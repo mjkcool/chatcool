@@ -15,8 +15,6 @@ const PORT = process.env.PORT;
 const protocol = process.env.protocol;
 const HOST = process.env.HOST;
 
-let SERVER_LIST = [];
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
@@ -32,7 +30,7 @@ const index = (req, res) => {
     //let ip = getIPAddress();
     res.clearCookie("nickname");
     res.clearCookie("isHost");
-    res.render('index', {host: ""});
+    res.render('index');
 }
 
 const createChat = (req, res) => {
@@ -61,7 +59,8 @@ router.route('/chat').get(chat);
 
 let httpServerList = {}; //key: port, value: server object
 let socketServerList = {};
-let chatServerList = {};
+let ownerList = {};
+
 
 //Main web server
 const httpMainServer = http.createServer(app).listen(PORT, HOST, () => {
@@ -79,28 +78,42 @@ let createChatServerInstance = (port) => {
     const io = socketIO(httpServerInstance);
     io.on("connection", client => {
         let roomName;
-        let Names = {};
+        let ClientList = {};
         let clientId = client.id;
-        console.log(client.handshake.headers, clientId);
         let cookies = cookie.parse(client.handshake.headers.cookie);
         let clientName = cookies.nickname;
-        Names[clientId] = clientName;
+
+        ClientList[clientId] = clientName;
+        if(ownerList[port] === undefined){
+            ownerList[port] = clientId;
+        }
+        
     
         client.on("joinRoom", data => {
-            console.log(data);
+            console.log("서버에서받은 아이디: "+clientId);
             client.join(data.roomName); // 특정 룸에 입장
             roomName = data.roomName;
-            io.sockets.in(roomName).emit("joinClientNotice", Names[clientId]);
+            io.sockets.in(roomName).emit("joinClientNotice", {isOwner: ownerList[port] == clientId ? true : false, name: ClientList[clientId]});
+            
         });
     
         client.on('reqMsg', data => {
             //특정 룸으로 데이터 전송
-            io.sockets.in(roomName).emit('recMsg', {name: Names[clientId], comment: data.comment});
+            io.sockets.in(roomName).emit('recMsg', {isOwner: ownerList[port] == clientId ? true : false, name: ClientList[clientId], comment: data.comment});
         });
     
         client.on("disconnect", () => {
-            io.sockets.in(roomName).emit("quitClientNotice", Names[clientId]);
-            delete Names.clientId;
+            io.sockets.in(roomName).emit("quitClientNotice", {isOwner: ownerList[port] == clientId ? true : false, name: ClientList[clientId]});
+            if(ownerList[port] == clientId){ //방장일 경우
+                //서버 삭제
+                //httpServerList[port].close(() => {console.log('http서버 삭제')});
+                httpServerInstance.close();
+                io.close();
+                delete httpServerList[port];
+                delete socketServerList[port];
+            }else{
+                delete ClientList.clientId;
+            }   
         });
     });
 

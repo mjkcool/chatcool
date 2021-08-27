@@ -35,12 +35,14 @@
     <p>This is a basic fixed menu template using fixed size containers.</p>
     <div class="ui form">
       <div class="fields">
+        <div class="field">
+          <label>접속 IP주소</label>
+          <input class="disableipAddress" type="text" disabled>
+        </div>
         <div class="required field">
           <label>접속 포트</label>
           <input id="joinroomport" type="text" placeholder="9999">
         </div>
-      </div>
-      <div class="fields">
         <div class="required field">
           <label>사용할 닉네임</label>
           <input id="join-nickname" type="text" placeholder="">
@@ -53,9 +55,13 @@
   </div>
   <div id="tab3" class="ui main text container hide">
     <h1 class="ui header">채팅 서버를 생성하세요</h1>
-    <p><%= host%> 클라이언트들이 고유의 포트번호를 통해 당신의 방에 접속할 수 있습니다</p>
+    <p>클라이언트들이 고유의 포트번호를 통해 당신의 방에 접속할 수 있습니다</p>
     <div id="createform" class="ui form">
       <div class="fields">
+        <div class="field">
+          <label>IP주소</label>
+          <input class="disableipAddress" type="text" disabled>
+        </div>
         <div class="required field">
           <label>생성할 방의 포트번호(4자리)</label>
           <input id="createroomport" name="port" placeholder="9999">
