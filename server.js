@@ -29,7 +29,6 @@ app.use(cookieParser());
 const index = (req, res) => {
     //let ip = getIPAddress();
     res.clearCookie("nickname");
-    res.clearCookie("isHost");
     res.render('index');
 }
 
@@ -41,12 +40,13 @@ const createChat = (req, res) => {
 
 const joinChat = (req, res) => {
     res.cookie('nickname', req.query.nickname);
-    res.redirect(`${process.env.protocol}://${process.env.HOST}:${req.query.port}/chat`);
+    res.redirect(`${protocol}://${HOST}:${req.query.port}/chat`);
 }
 
 const chat = (req, res) => {
     res.render('chat');
 }
+
 
 
 //Route
@@ -104,13 +104,14 @@ let createChatServerInstance = (port) => {
     
         client.on("disconnect", () => {
             io.sockets.in(roomName).emit("quitClientNotice", {isOwner: ownerList[port] == clientId ? true : false, name: ClientList[clientId]});
+            console.log("서버 삭제합니다")
             if(ownerList[port] == clientId){ //방장일 경우
-                //서버 삭제
-                //httpServerList[port].close(() => {console.log('http서버 삭제')});
+                console.log("서버입니다");
                 httpServerInstance.close();
                 io.close();
                 delete httpServerList[port];
                 delete socketServerList[port];
+                delete ownerList[port];
             }else{
                 delete ClientList.clientId;
             }   
