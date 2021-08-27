@@ -37,12 +37,16 @@ $("#createform").form({
     }
 });
 
+function joinRoom(){
+    let $port = $('#joinroomport').val();
+    let $name = $('#join-nickname').val();
+    location.href = `joinchat?port=${$port}&nickname=${$name}`;
+}
 
 function enterRoom(){
     if( $("#createform").form('is valid')) {
         let $port = $("#createroomport").val();
         let $name = $("#host-nickname").val();
-        console.log($port);
         location.href = `createchat?port=${$port}&nickname=${$name}`;
         
     }

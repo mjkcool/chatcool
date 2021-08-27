@@ -37,16 +37,16 @@
       <div class="fields">
         <div class="required field">
           <label>접속 포트</label>
-          <input type="text" placeholder="9999">
+          <input id="joinroomport" type="text" placeholder="9999">
         </div>
       </div>
       <div class="fields">
         <div class="required field">
           <label>사용할 닉네임</label>
-          <input type="text" placeholder="">
+          <input id="join-nickname" type="text" placeholder="">
         </div>
       </div>
-      <button class="ui teal button">
+      <button onclick="joinRoom()" class="ui teal button">
         접속
       </button>
     </div>

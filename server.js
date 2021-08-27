@@ -9,8 +9,11 @@ const router = express.Router();
 const cookieParser = require('cookie-parser');
 const cookie = require("cookie");
 const app = express();
-const Controller = require('./controllers/controller');
+//const Controller = require('./controllers/controller');
 
+const PORT = process.env.PORT;
+const protocol = process.env.protocol;
+const HOST = process.env.HOST;
 
 let SERVER_LIST = [];
 
@@ -23,18 +26,42 @@ app.use(express.urlencoded({extended:false})); //Parse URL-encoded bodies
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(cookieParser());
 
+
+//Controller
+const index = (req, res) => {
+    //let ip = getIPAddress();
+    res.clearCookie("nickname");
+    res.clearCookie("isHost");
+    res.render('index', {host: ""});
+}
+
+const createChat = (req, res) => {
+    res.cookie('nickname', req.query.nickname);
+    createChatServerInstance(Number(req.query.port));
+    res.redirect(`${process.env.protocol}://${process.env.HOST}:${req.query.port}/chat`);
+}
+
+const joinChat = (req, res) => {
+    res.cookie('nickname', req.query.nickname);
+    res.redirect(`${process.env.protocol}://${process.env.HOST}:${req.query.port}/chat`);
+}
+
+const chat = (req, res) => {
+    res.render('chat');
+}
+
+
+//Route
 app.use('/', router);
-router.route('/').get(Controller.index);
+router.route('/').get(index);
+router.route('/createchat').get(createChat);
+router.route('/joinchat').get(joinChat);
+router.route('/chat').get(chat);
 
-router.route('/createchat').get(Controller.createChat);
-router.route('/chat').get(Controller.chat);
-
-const PORT = process.env.PORT;
-const protocol = process.env.protocol;
-const HOST = process.env.HOST;
 
 let httpServerList = {}; //key: port, value: server object
 let socketServerList = {};
+let chatServerList = {};
 
 //Main web server
 const httpMainServer = http.createServer(app).listen(PORT, HOST, () => {
@@ -79,8 +106,3 @@ let createChatServerInstance = (port) => {
 
     socketServerList[port] = io;
 }
-
-createChatServerInstance(5002);
-
-
-// module.exports = { createChatServerInstance }
