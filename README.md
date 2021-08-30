@@ -6,3 +6,4 @@ NodeJS, Socket.io
 * 실시간 채팅(데이터 저장X)
 * 포트를 통한 채팅 서버방 생성(방장)
 * 포트를 통한 채팅 참여
+* ONLY ```localhost```
